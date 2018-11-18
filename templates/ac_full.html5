@@ -1,0 +1,7 @@
+   <div class="mod_ac_door_details">
+      
+    <?php if (!$this->locked) : ?> 
+       <?php echo $this->doorText;?>
+    <?php else : ?> <h1>HEY! DU HAST HIER NIX VERLOREN!</h1>
+    <?php  endif; ?>
+   </div>

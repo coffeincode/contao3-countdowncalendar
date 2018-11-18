@@ -1,0 +1,50 @@
+
+<div class="<?php echo $this->class ?> block"<?php echo $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
+   
+    <?php if ($this->title): ?> <h2>
+        <?php echo $this->title;?></h2><?php endif;?>
+    <?php if ($this->debug):?>  <H1> Achtung, debug-modus ist eingeschaltet!!</h1><?php endif;?>
+    <div class="ac_container">
+         <div id="popup_overlay" class="hidden"></div> 
+        <div class="ac_background">
+            <?php $this->insert('picture_default', $this->picture); ?>
+        </div>
+        <div id="adventcalendar" class="ac_doors"style="position:absolute;top:0;display:flex;flex-wrap:wrap;">
+            <?php if ($this->adventdoors): ?> <?php echo $this->doorsList; ?>
+            <?php elseif ($this->debug):?> 
+                <?php echo $this->doorsList; ?>
+            <?php else :?>  <?php echo "Es ist zu früh, der Kalender geht erst später online! "; ?> <br>    
+        </div>
+    </div>
+    
+<?php endif; ?>
+</div>
+<script type="text/javascript">
+var popups = document.getElementsByClassName("secret");
+var overlay = document.getElementById("popup_overlay");
+for (var i=0; i<popups.length; i++){
+	popups[i].addEventListener("click",showSecret,false);
+        console.log("popups werden gezählt");
+}
+
+
+function showSecret(e) {
+	var dayClicked=e.target.getAttribute("data-daycount");
+	console.log("Es wurde Tür nummer "+dayClicked+" geklickt.");
+	
+	var secret = document.getElementById("secret_"+dayClicked);
+	console.log(secret);
+	secret.classList.toggle("hidden");
+        overlay.classList.toggle("hidden");
+       
+}
+
+function closePopup(e){
+	console.log("Hallo Close!");
+        console.log(e.target);
+	console.log(e);
+	e.path[2].classList.toggle("hidden");
+        overlay.classList.toggle("hidden");
+	
+}
+</script>
