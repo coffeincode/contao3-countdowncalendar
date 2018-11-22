@@ -13,4 +13,4 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC'][''] = '';
+$GLOBALS['TL_LANG']['MSC']['cdc_details_tooEarly'] = 'Entschuldigung, aber diese Tür öffnet sich noch nicht, es ist noch zu früh.';

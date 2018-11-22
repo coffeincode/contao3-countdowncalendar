@@ -2,6 +2,6 @@
       
     <?php if (!$this->locked) : ?> 
        <?php echo $this->doorText;?>
-    <?php else : ?> <h1>HEY! DU HAST HIER NIX VERLOREN!</h1>
+    <?php else : ?> <h1>Neugierig?</h1><p><?php echo $GLOBALS['TL_LANG']['MSC']['cdc_details_tooEarly'];?></p>
     <?php  endif; ?>
    </div>

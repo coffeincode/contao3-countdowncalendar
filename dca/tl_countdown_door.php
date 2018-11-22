@@ -65,7 +65,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 		'edit' => array
 		(
                     'label'               => &$GLOBALS['TL_LANG']['tl_countdown_door']['edit'],
-                    'href'                => 'table=tl_content', // angelehnt an codefog, war im tl_mitarbeiter mal: => 'act=edit',
+                    'href'                => 'table=tl_content', 
                     'icon'                => 'edit.gif'
 		),
 		'editheader' => array //das ist hier neu
@@ -109,7 +109,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	'palettes' => array //Dies sind die Paletten die bei editheader kommen sollen
 	(
 		'__selector__'                => array('published'),
-        'default'                     => '{door_legend},door_index,alias,activeStart,activeStop,door_title,door_subtitle,teaser,{publishing_legend}, published;{expert_legend},cssClass '
+        'default'                     => '{door_legend},door_index,alias,activeStart,door_title,door_subtitle,teaser,{publishing_legend}, published;{expert_legend},cssClass '
             
 	),
         'subpalettes' => array
@@ -123,8 +123,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
 		),
-        'pid' => array  //TODO in codefogs code ist nur noch sql, aber keine foreign-key oder relation definieriert... warum?
-		(
+        'pid' => array  (
 			'foreignKey'              => 'tl_countdowncalendar.id',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
@@ -137,12 +136,12 @@ $GLOBALS['TL_DCA'][$strTable] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-	    //todo: ist das jetzt nötig oder nicht?! 
-	   'door_index' => array //todo: den Index aus dem Datum erzeugen
+
+	   'door_index' => array 
 	    (
 	        'label'                   => &$GLOBALS['TL_LANG']['tl_countdown_door']['door_index'],
 	        'exclude'                 => true,
-	        'inputType'               => 'text', //Todo darf das Text bleiben?
+	        'inputType'               => 'text', 
 	        'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 	        'sql'                     => "int(10) unsigned NOT NULL default '0'"
 	    ),
@@ -151,7 +150,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_countdown_door']['door_title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'submitOnChange'=>true,'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'submitOnChange'=>true,'tl_class'=>'w50 clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'door_subtitle' => array
@@ -206,7 +205,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
             'label'                   => &$GLOBALS['TL_LANG']['tl_countdown_door']['activeStart'],
             'exclude'                 => true,
             'inputType'               => 'text',
-            'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'submitOnChange'=>true,'tl_class'=>'w50 wizard'),
+            'eval'                    => array('rgxp'=>'date', 'submitOnChange'=>true,'datepicker'=>true, 'tl_class'=>'w50 clr wizard'),
             'save_callback'           => array (array($strTable, 'calcIndex')),
             'sql'                     => "varchar(10) NOT NULL default ''" 
             
@@ -255,10 +254,7 @@ class tl_countdown_door extends Backend{
 	 * 
 	 */
 	public function calcIndex($varDateValue, DataContainer $dc){
-	    // todo: take the actual activeStart and subtract the calendar's start-date, divide by 86400 and this +1 is the index. 
-	    // needs to be called everytime the date is changed. 
-	   // $objVersions = new \Versions('tl_countdown_door', $dc->activeRecord->id);
-	   // $objVersions->initialize();
+	   
 	    if ($varDateValue != $dc->activeRecord->activeStart){
 	        $calendarStart = $this->Database->prepare("SELECT calendar_start FROM tl_countdowncalendar WHERE id=?")->execute($dc->activeRecord->pid)->fetchAssoc();
                 if (version_compare(phpversion(), '7.0.0') >= 0) {
@@ -271,8 +267,8 @@ class tl_countdown_door extends Backend{
                 
                 }
                 if ($offset<=0) return false;
-                System::log("Das offset ist d: ".$offset." tage ", __METHOD__, TL_GENERAL);
-                System::log("Die timestamps lauten vardatevalue: ".$varDateValue.", calendarStart: ".$calendarStart['calendar_start'], __METHOD__, TL_GENERAL);
+               // System::log("Das offset ist d: ".$offset." tage ", __METHOD__, TL_GENERAL);
+               // System::log("Die timestamps lauten vardatevalue: ".$varDateValue.", calendarStart: ".$calendarStart['calendar_start'], __METHOD__, TL_GENERAL);
 	        $this->Database->prepare("UPDATE tl_countdown_door SET door_index=".$offset." WHERE id=?")->execute($dc->activeRecord->id);
 	    }
 	    return $varDateValue;

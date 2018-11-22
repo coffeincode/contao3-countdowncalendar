@@ -5,7 +5,8 @@
         
             <?php if ($this->acDetails): ?> <?php echo $this->acDetails; ?> <br>
             <?php endif; ?>
-            
-            <?php echo $this->referer; ?> <br>
-            <?php echo $this->back; ?> <br>
+            <p class="back">
+            	<a href=<?php echo $this->referer; ?> >
+            	<?php echo $this->back; ?> <br></a>
+            </p>
 </div>

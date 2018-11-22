@@ -4,7 +4,7 @@
  * Contao Open Source CMS
  *
  * Copyright (c) 2005-2018 Leo Feyer
- *
+ * Contao 3.5
  * @package   CountdownCalendar
  * @author    Marina Diezler
  * @license   none

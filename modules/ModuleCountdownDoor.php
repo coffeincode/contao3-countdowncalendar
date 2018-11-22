@@ -4,7 +4,7 @@
  * Contao Open Source CMS
  *
  * Copyright (c) 2005-2016 Leo Feyer
- *
+ *Contao 3.5
  * @package   CountdownCalendar
  * @author    Marina Diezler
  * @license   none
@@ -22,9 +22,8 @@ abstract class ModuleCountdownDoor extends \Module
 	/**
 	 * Template
 	 * @var string
-         * WICHTIG! wenn das nicht festgelegt wird, findet er nicht das richtige Template und nix wird angezeigt! 
 	 */
-	protected $strAcCeTemplate;// = 'ma_default';
+	protected $strAcCeTemplate;
         protected $idReaderPage;
         
         /**
@@ -53,11 +52,13 @@ abstract class ModuleCountdownDoor extends \Module
                 }
                 else {
                     $objTemplate->link ="#";
+                    $objTemplate->teaser="";
                 }
             }
             
             $id = $objDoor->id;
-  
+            $objTemplate->door_index=$objDoor->door_index;
+            
             // generate anonymous functions for the text/content-elements which is only called in case the template parsed asks for it, see ModuleNews.php 
             $objTemplate->doorText = function () use ($id)
             {  
@@ -84,34 +85,40 @@ abstract class ModuleCountdownDoor extends \Module
             
             return $objTemplate->parse($objDoor);
         }
-     
-     /**
-     * Erstellt den Link zur Detailseite.
-     * 
-      * 
-      * @param type $arrMA
-      * @param type $objReaderPage
-      * @param type $intTemplate
-      * @return string
-      */    
-     protected function parseAllDoors ($arrDoors=null, $strTimestamp, $objReaderPage, $intTemplate){    
-         $objTemplate = new \FrontendTemplate($this->ac_details_template);
+   
+    protected function parseAllDoors ( $strTimestamp, $intTemplate, $arrDoors=null){    
+        // $objTemplate = new \FrontendTemplate($this->ac_details_template);
+         //$objTemplate =new \FrontendTemplate();
          if ($arrDoors === null){return null;}
          else {//das Array ist schonmal nicht leer
              $arrHelperDoors='';
-             $arrHelperSecrets='';
              
              //zuerst die türen         
              while ($arrDoors->next()){
                  $arrHelperDoors .= $this->parseDoor($arrDoors,$strTimestamp, $intTemplate );
-                 $arrHelperSecrets.= $this->parseDoor($arrDoors,$strTimestamp, 'default_secret',$objReaderPage);
+                 
              }
-             //dann die secrets
-             $arrHelper=$arrHelperDoors.''.$arrHelperSecrets;
-             
-             return $arrHelper;
+                          
+             return $arrHelperDoors;
          }
      }   
+     
+      protected function parseAllSecrets( $strTimestamp, $objReaderPage, $intTemplate, $arrDoors=null){    
+     
+         if ($arrDoors === null){return null;}
+         else {//das Array ist schonmal nicht leer
+          
+             $arrHelperSecrets='';
+            
+             //zuerst die türen         
+             while ($arrDoors->next()){
+               $arrHelperSecrets.= $this->parseDoor($arrDoors,$strTimestamp, 'default_secret',$objReaderPage);
+             }
+             
+             return $arrHelperSecrets;
+         }
+     }   
+     
         /**
      * Erstellt den Link zur Detailseite.
      * @param $intId

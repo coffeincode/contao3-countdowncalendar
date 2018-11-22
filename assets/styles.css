@@ -36,14 +36,19 @@ div#adventcalendar {
    height: 100%;
 }
 .day {
-  width: 150px;
-  height: 100px;
+  
   color: #fff;
   font-family: Arial, sans-serif;
   font-size: 1.5em;
-  line-height: 4em;
+
   transform-style: preserve-3d;
  /* position: absolute;*/
+
+    width:  124px;
+    line-height:  100px;
+    padding: 5%;
+
+
 }
 
 .door {
@@ -54,6 +59,7 @@ div#adventcalendar {
   width: 100%;
   background-color: #911eb1;
   opacity: 0.5;
+  border: 1px dotted #000;
 }
 .day.active {
   display: block;
@@ -63,8 +69,9 @@ div#adventcalendar {
   transform: scale(0.005);
   background-color: #631478;
   position: absolute;
-  width: 100%;
-  top:0;
+  width: 88%;
+  top:7px;
+  height:88%;
  
   /*height: 100%;*/
 }
@@ -83,9 +90,200 @@ div#adventcalendar {
   transition-duration: 3s;
    cursor:pointer;
 }
-.active .door {
+
+a {
+  color: white;
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+.hidden {
+  visibility: hidden;
+}
+div.popup {
+  position:  absolute;
+  width: 100%;
+  height:  100%;
+  left: 0;
+  
+  top: 0;
+}
+div.popup .inner {
+    width: 800px;
+    max-width:  80%;
+    min-height:35%;
+    
+        
+    margin: 2% auto;
+    top: 10vh;
+    
+  position: relative;
+ 
+  padding: 2em;
+  
+  z-index:5000001;
+  border-radius: 5px;
+  background-color: #66157d;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 1.0em;
+}
+div.popup .inner .more {
+  margin-top: 2em;
+}
+div.popup .inner .more a {
+  background-color: darkcyan;
+  padding: 0.8em;
+  border-radius: 5px;
+ 
+}
+span.close_me {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: #1d1d1d;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 1.5em;
+    cursor: pointer;
+    z-index: 11;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+div#popup_overlay{
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index: 50000;
+    background-color: rgba(0,0,0,0.8);
+    top:0;
+    left:0;
+   
+}
+
+.ac_doors_inner_wrapper {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-height: 98%;
+}
+.ac_daywrapper {
+    max-height: 1px;
+}
+
+p.click2open {
+    text-align: center;
+}
+.cdc_img_overlay.block {
+    height:  100%;
+    width:  100%;
+    backface-visibility: visible;
+    position:  absolute;
+}
+/********************************************
+/**
+ * 
+ *
+ * @package   CountdownCalendar
+ * @author    Marina Diezler
+ * @license   none
+ * @copyright Coffeincode 2018
+
+
+
+
+.ac_container {    
+    position:  relative;
+}
+
+.ac_background {}
+
+.ac_doors {
+    position:  absolute;
+    top: 0;
+    display:  flex;
+}
+
+ {
+  margin: 0;
+  padding: 0;
+}
+
+div#adventcalendar {
+  margin-left: auto;
+  margin-right: auto;
+  perspective-origin: center;
+  perspective: 1200px;
+  width: 100%;
+   height: 100%;
+}
+.day {
+  
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 1.5em;
+
+  transform-style: preserve-3d;
+ /* position: absolute;
+
+    width:  124px;
+    line-height:  100px;
+    padding: 5%;
+
+
+}
+
+.door {
+ /* position: absolute;
+  text-align: center;
+  transform-origin: left;
+  /* WICHTIG!!! 
+  width: 100%;
+  background-color: #911eb1;
+  opacity: 0.5;
   border: 1px dotted #000;
 }
+.day.active {
+  display: block;
+}
+
+.secret {
+  transform: scale(0.005);
+  background-color: #631478;
+  position: absolute;
+  width: 88%;
+  top:7px;
+  height:88%;
+ 
+  /*height: 100%;
+}
+.secret a {
+  padding-left: 10%;
+}
+.active:hover .door {
+  transform: rotateY(-120deg);
+  transition-duration: 2s;
+  border: 1px dotted #000;
+}
+.active:hover .secret {
+  display: block;
+  transform: scale(1);
+  transition-delay: 1s;
+  transition-duration: 3s;
+   cursor:pointer;
+}
+
 a {
   color: white;
   text-decoration: none;
@@ -122,7 +320,7 @@ div.popup .inner {
  
   padding: 2em;
   
-  z-index:10;
+  z-index:5000001;
   border-radius: 5px;
   background-color: #66157d;
   color: #ffffff;
@@ -153,14 +351,4 @@ span.close_me {
     font-size: 1em;
     font-weight: bold;
 }
-div#popup_overlay{
-    width:100%;
-    height:100%;
-    position:fixed;
-   
-    background-color: rgba(0,0,0,0.8);
-    top:0;
-    left:0;
-   
-}
-
+*/

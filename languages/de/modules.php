@@ -14,7 +14,7 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD'][''] = array('', '');
+$GLOBALS['TL_LANG']['MOD']['countdowncalendar'] = array('Countdown-Kalender', '');
 
 
 /**

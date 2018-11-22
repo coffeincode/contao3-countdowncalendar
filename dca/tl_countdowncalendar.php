@@ -67,40 +67,39 @@ $GLOBALS['TL_DCA'][$strTable] = array
 				'href'                => 'table=tl_countdown_door',
 				'icon'                => 'edit.gif'
 			),
-                'editheader' => array  //soll zu den Basiseinstellungen des KAlenders führen
+                        'editheader' => array  //soll zu den Basiseinstellungen des KAlenders führen
 			(
 				'label'               => &$GLOBALS['TL_LANG'][$strTable]['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif',
 				'button_callback'     => array('tl_countdowncalendar', 'editHeader')
 			),
-			'copy' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strTable]['copy'],
-				'href'                => 'act=copy',
-				'icon'                => 'copy.gif'
-			),
-			'delete' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strTable]['delete'],
-				'href'                => 'act=delete',
-				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"' 
-			),
-		    'toggle' => array
-		    (
-		        'label'               => &$GLOBALS['TL_LANG'][$strTable]['toggle'],
-		        'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-		        'button_callback'	=> array($strTable, 'toggleIcon')
-		    ),
-			'show' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG'][$strTable]['show'],
-				'href'                => 'act=show',
-				'icon'                => 'show.gif'
-			)
-                       
-		)
+                    'copy' => array
+                    (
+                        'label'               => &$GLOBALS['TL_LANG'][$strTable]['copy'],
+                        'href'                => 'act=copy',
+                        'icon'                => 'copy.gif'
+                    ),
+                    'delete' => array
+                    (
+                        'label'               => &$GLOBALS['TL_LANG'][$strTable]['delete'],
+                        'href'                => 'act=delete',
+                        'icon'                => 'delete.gif',
+                        'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"' 
+                    ),
+                    'toggle' => array
+                    (
+                        'label'               => &$GLOBALS['TL_LANG'][$strTable]['toggle'],
+                        'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                        'button_callback'	=> array($strTable, 'toggleIcon')
+                    ),
+                    'show' => array
+                    (
+                        'label'               => &$GLOBALS['TL_LANG'][$strTable]['show'],
+                        'href'                => 'act=show',
+                        'icon'                => 'show.gif'
+                    )    
+                )
 	),
 
 	// Select
@@ -118,56 +117,69 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	// Palettes
 	'palettes' => array
 	(
-	    '__selector__'                => array('addImage', 'acDebug'),
-            'default'                     => '{calendar_name_legend},
-                                               calendar_name, 
-                                               calendar_start, 
+	    '__selector__'                => array('acDebug', 'addOverlay'),
+            'default'                     => '{title_legend:show},calendar_name, calendar_start, 
                                                calendar_stop, 
                                                jumpTo,
-                                               urlFragment,
-                                               acDebug,
-                                          {layout_legend:hide},
+                                               urlFragment;
+                                             {debug_legend:hide},
+                                               acDebug;
+                                             {cc_layout_legend},
+                                                singleSRC,
+                                                alt, 
+                                                size,
+                                                addOverlay,
                                                 showGoneDates,
+                                                doorsPerRowLG,
+                                                doorsPerRowMD,
+                                                doorsPerRowXS,
+                                                breakpointMD,
+                                                breakpointXS,
                                                 addImage,
-                                                svgSprites,
-                                                jsTemplate,
-                                            {expert_legend:hide},
-                                                published,
-                                                '
+                                                doorBgColor, 
+                                                doorFontColor,
+                                                doorSecretBgColor,
+                                                doorSecretFontColor,
+                                                popSecretButtonBgColor,
+                                                popSecretButtonFontColor,
+                                                popSecretBgColor,
+                                                popSecretFontColor,                            
+                                                
+                                            '
 	),
     'subpalettes' => array
     (
-        'addImage'      =>  'singleSRC,alt, size,addOverlay,overlayType',
-        'acDebug'       =>  'acDebugDate'
+        'acDebug'       => 'acDebugDate', 
+        'addOverlay'    => 'overlayType,overlayColor'
     ),
 	// Fields
 	'fields' => array
 	(
-		'id' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
-		),
-		'tstamp' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
-		'calendar_name' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG'][$strTable]['calendar_name'],
-			'exclude'                 => true,
-                        'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-        ),
+            'id' => array
+            (
+                'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+            ),
+            'tstamp' => array
+            (
+            	'sql'                     => "int(10) unsigned NOT NULL default '0'"
+            ),
+            'calendar_name' => array
+            (
+                'label'                   => &$GLOBALS['TL_LANG'][$strTable]['calendar_name'],
+                'exclude'                 => true,
+                'search'                  => true,
+		'inputType'               => 'text',
+		'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+		'sql'                     => "varchar(255) NOT NULL default ''"
+            ),
 	    'calendar_start' => array
 	    (
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['calendar_start'],
 	        'exclude'                 => true,
 	        'search'                  => true,
 	        'inputType'               => 'text',
-	        'eval'                    => array('mandatory'=>true, 'rgxp'=>'date', 'datepicker'=>true, 'tl_class'=>'w50 wizard'), 
-            'sql'                     => "varchar(10) NOT NULL default ''"
+	        'eval'                    => array('mandatory'=>true, 'rgxp'=>'date', 'datepicker'=>true, 'tl_class'=>'w50'), 
+                'sql'                     => "varchar(10) NOT NULL default ''"
 	    ),
 	    'calendar_stop' => array
 	    (
@@ -175,7 +187,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'exclude'                 => true,
 	        'search'                  => true,
 	        'inputType'               => 'text',
-	        'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+	        'eval'                    => array('rgxp'=>'date', 'datepicker'=>true, 'tl_class'=>'w50 clr'),
 	        'sql'                     => "varchar(10) NOT NULL default ''"
 	    ),
             'urlFragment' => array
@@ -200,7 +212,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['acDebugDate'],
 	        'exclude'                 => true,
 	        'inputType'               => 'text',
-                'eval'                    => array('rgxp'=>'date', 'datepicker'=>true,'mandatory'=>true, 'tl_class'=>' wizard'),
+                'eval'                    => array('rgxp'=>'date', 'datepicker'=>true,'mandatory'=>true, 'tl_class'=>'w50 clr m12'),
 	        'sql'                     => "varchar(10) NOT NULL default ''"
 	    ),
 	    'showGoneDates' => array
@@ -208,17 +220,58 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['showGoneDates'],
 	        'exclude'                 => true,
 	        'inputType'               => 'checkbox',
-	        //'eval'                    => array('submitOnChange'=>true, ),
-	        'sql'                     => "char(1) NOT NULL default ''"
+	        'sql'                     => "char(1) NOT NULL default ''",
+                'eval'                    => array('tl_class'=>'w50 clr ')
 	    ),
-	    'addImage' => array
+            'doorsPerRowLG' => array
 	    (
-	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['addImage'],
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['doorsPerRowLG'],
 	        'exclude'                 => true,
-	        'inputType'               => 'checkbox',
-	        'eval'                    => array('submitOnChange'=>true, ),
-	        'sql'                     => "char(1) NOT NULL default ''"
+	        'inputType'               => 'select',
+	        'options'                 => array('10','9','8','7','6','5','4','3'),
+	        'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	        'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'tl_class'=>'w50 clr '),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
 	    ),
+            'doorsPerRowMD' => array
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['doorsPerRowMD'],
+	        'exclude'                 => true,
+	        'inputType'               => 'select',
+	        'options'                 => array('10','9','8','7','6','5','4','3'),
+	        'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	        'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50 clr'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            'doorsPerRowXS' => array
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['doorsPerRowXS'],
+	        'exclude'                 => true,
+	        'inputType'               => 'select',
+	        'options'                 => array('10','9','8','7','6','5','4','3','2','1'),
+	        'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	        'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true,  'tl_class'=>'w50 clr'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            'breakpointMD' => array
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['breakpointMD'],
+	        'exclude'                 => true,
+	        'search'                  => true,
+	        'inputType'               => 'text',
+	        'eval'                    => array('mandatory'=>'true', 'nospace'=>true,  'tl_class'=>'w50 clr'),
+	        'sql'                     => "varchar(10) NOT NULL default ''"
+	    ),
+            'breakpointXS' => array
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['breakpointXS'],
+	        'exclude'                 => true,
+	        'search'                  => true,
+	        'inputType'               => 'text',
+	        'eval'                    => array('mandatory'=>'true','tl_class'=>'w50 clr'),
+	        'sql'                     => "varchar(10) NOT NULL default ''"
+	    ),
+	    
 	    'singleSRC' => array
 	    (
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['singleSRC'],
@@ -233,9 +286,9 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['size'],
 	        'exclude'                 => true,
 	        'inputType'               => 'imageSize',
-	        'options'                 => System::getImageSizes(),
+	        'options'                 => \Contao\System::getImageSizes(),
 	        'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	        'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+	        'eval'                    => array('rgxp'=>'natural', 'includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true),
 	        'sql'                     => "varchar(64) NOT NULL default ''"
 	    ),
 	    'addOverlay' => array
@@ -243,17 +296,100 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['addOverlay'],
 	        'exclude'                 => true,
 	        'inputType'               => 'checkbox',
-	        //'eval'                    => array('submitOnChange'=>true, ),
+	        'eval'                    => array('submitOnChange'=>true, ),
 	        'sql'                     => "char(1) NOT NULL default ''"
 	    ),
-	    'overlayType' => array
+            'overlayColor' => array
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['overlayColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            'overlayType' => array
 	    (
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['overlayType'],
 	        'exclude'                 => true,
 	        'inputType'               => 'select',
-	        'options'                 => array('darken', 'lighten', 'dots','stripes'),
-	        //'eval'                    => array('submitOnChange'=>true, ),
+                 'eval'                   => array('includeBlankOption'=>true, 'nospace'=>true, 'helpwizard'=>true, 'tl_class'=>'w50 clr'),
+	        'options'                 => array('normal','multiply','screen', 'overlay', 'darken', 'lighten', 'color-dodge','color-burn', 'hard-light', 'soft-light', 'difference', 'exclusion', 'hue', 'saturation', 'color', 'luminosity'),
 	        'sql'                     => "char(1) NOT NULL default ''"
+	    ),
+            'doorBgColor' => array
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['doorBgColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            'doorFontColor' => array
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['doorFontColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            'doorSecretBgColor' => array  //door zooming in background color
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['doorSecretBgColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            
+            'doorSecretFontColor' => array //door zooming in font color
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['doorSecretFontColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            'popSecretButtonBgColor' => array //door zooming in font color
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['popSecretButtonBgColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            'popSecretButtonFontColor' => array //door zooming in font color
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['popSecretButtonFontColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+            
+            'popSecretBgColor' => array //door zooming in font color
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['popSecretBgColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
+	    ),
+              'popSecretFontColor' => array //door zooming in font color
+	    (
+	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['popSecretFontColor'],
+	        'exclude'                 => true,
+	        'inputType'               => 'text', 
+                'colorpicker'             => true,
+                'eval'                    => array('maxlength'=>6, 'multiple'=>true, 'size'=>2, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+	        'sql'                     => "varchar(64) NOT NULL default ''"
 	    ),
 	    'svgSprites' => array
 	    (
@@ -261,7 +397,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'exclude'                 => true,
 	        'inputType'               => 'fileTree',
 	        'eval'                    => array('filesOnly'=>true, 'extensions'=>Config::get('validImageTypes'), 'fieldType'=>'radio'), //todo validtypes auf svg setzen!
-	        'save_callback'           => array (array($strTable, 'storeFileMetaInformation')	),
+	        'save_callback'           => array (array($strTable, 'storeFileMetaInformation')),
 	        'sql'                     => "binary(16) NULL"
 	    ),
 	    'jumpTo' => array(
@@ -282,7 +418,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'save_callback'           => array (array($strTable, 'storeFileMetaInformation')	),
 	        'sql'                     => "binary(16) NULL"
 	    ),
-	    'published'=> array
+'published'=> array
 	    (
 	        'label'                   => &$GLOBALS['TL_LANG'][$strTable]['published'],
 	        'exclude'                 => true,
@@ -292,7 +428,7 @@ $GLOBALS['TL_DCA'][$strTable] = array
 	        'eval'                    => array('submitOnChange'=>true, 'doNotCopy'=>true),
 	        'sql'                     => "char(1) NOT NULL default ''"
 	    ),
-	    
+	
 
 	)
 );
